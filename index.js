@@ -1,12 +1,25 @@
 import express from 'express'
-// import cors from 'cors'
+import cors from 'cors'
 import credit_route from './api/credit.route.js'
 
 
 const app = express()
 const port = 80
 
-// app.use(cors())
+const corsOpts = {
+  origin: '*',
+
+  methods: [
+    'GET',
+    'POST',
+  ],
+
+  allowedHeaders: [
+    'Content-Type',
+  ],
+};
+
+app.use(cors(corsOpts))
 app.use(express.json())
 app.use(express.urlencoded({
     extended: true
