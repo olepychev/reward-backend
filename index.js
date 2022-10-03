@@ -4,7 +4,7 @@ import credit_route from './api/credit.route.js'
 
 
 const app = express()
-const port = 80
+const port = process.env.PORT || 8000
 
 const corsOpts = {
   origin: '*',
