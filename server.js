@@ -15,6 +15,6 @@ app.use(express.urlencoded({
 
 app.use('/jackpot', credit_route)
 
-app.listen(port, () => console.log('Listening on localhost'))
+app.listen(port, () => console.log(`Listening on localhost:${port}`))
 
 export default app
