@@ -31,5 +31,11 @@ router.route('/:address').put((req, res, next) => {
     }).catch((err) => {})
 })
 
+router.route('/').post((req, res, next) => {
+    set(ref(db, `webhook`), req.body).then(() => {
+        res.json({ message: 'success' })
+    }).catch((err) => {})
+})
+
 
 export default router
