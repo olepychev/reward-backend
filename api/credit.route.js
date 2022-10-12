@@ -63,11 +63,13 @@ const updateAddemail = (req, res, next) => {
 }
 
 router.route('/').post((req, res, next) => {
-  if (req.body.entry.type == 'wallet_address') {
-    updateAddemail(req, res, next)
-    updateEmailent(req, res, next)
+  if(req.body.entry.status == 'valid') {
+    if (req.body.entry.type == 'wallet_address') {
+      updateAddemail(req, res, next)
+      updateEmailent(req, res, next)
+    }
+    else updateEmailent(req, res, next)
   }
-  else updateEmailent(req, res, next)
 })
 
 
