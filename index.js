@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import credit_route from './api/credit.route.js'
+import credit_route, {dailyUpdate} from './api/credit.route.js'
 
 
 const app = express()
@@ -28,6 +28,6 @@ app.use(express.urlencoded({
 
 app.use('/jackpot', credit_route)
 
-app.listen(port, () => console.log(`Listening on localhost:${port}`))
+setInterval(dailyUpdate, 60*60*24*1000)
 
-export default app
+app.listen(port, () => console.log(`Listening on localhost:${port}`))
