@@ -72,7 +72,16 @@ router.route('/:address').put((req, res, next) => {
 //     else updateEmailent(req, res, next)
 //   }
 // })
-
+router.route('/noncomp/:address').get((req, res, next) => {
+  get(ref(db, `noncomp/${req.params.address}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      res.status(200).send({ value: snapshot.val() })
+    }
+    else {
+      res.status(200).send({ value: 0 })
+    }
+  }).catch((err) => { next(err) })
+})
 router.route('/noncomp').post((req, res, next) => {
   get(ref(db, `noncomp/${req.body.address}`)).then((snapshot) => {
     if (snapshot.exists()) {
