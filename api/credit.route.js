@@ -73,6 +73,26 @@ router.route('/:address').put((req, res, next) => {
 //   }
 // })
 
+router.route('/noncomp').post((req, res, next) => {
+  get(ref(db, `noncomp/${req.body.address}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      set(ref(db, `noncomp/${req.body.address}`), snapshot.val() + req.body.reward)
+        .then(() => {
+          res.json({ message: 'success' })
+        })
+        .catch((err) => { next(err) })
+    }
+    else {
+      set(ref(db, `noncomp/${req.body.address}`), req.body.reward)
+        .then(() => {
+          res.json({ message: 'success' })
+        })
+        .catch((err) => { next(err) })
+    }
+  })
+}
+)
+
 const proData = (updata2, data) => {
   data.forEach((ele) => {
     if (ele.status == 'Valid') {
@@ -105,7 +125,7 @@ export const dailyUpdate = async () => {
     emailent: {}
   }
   const camps = ['VzFR5', 'baTVR', 'ygi5N', 'tJJbG', 'TvJRI', 'ryyZQ', 'yjzVW', 'gmbJ9', 'otY3K', 'jvpgZ', 'FCg45']
-  for (const camp of camps) { 
+  for (const camp of camps) {
     updata = await getActions(updata, camp)
   }
   set(ref(db, '/'), updata).then(() => {
